@@ -1,0 +1,237 @@
+/* ==========================================================================
+   CSS Variables / Root
+   ========================================================================== */
+   :root {
+    --footer-height: 40px;
+    --header-height: 160px;
+    --middle-column-min-width: 1100px;
+    --middle-column-max-width: 1400px;
+    --canvas-size: 600px;
+    --canvas-bg: #fff;
+    --canvas-border: 1px solid #dce3e6;
+    --canvas-border-radius: 4px;
+    --test-canvas-size: 200px;
+    --primary-color: #fff;
+    --button-color: #74ABD2;
+    --button-hover-color: #468FC3;
+}
+
+/* ==========================================================================
+   Base Layout Styles
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Container and Column Layout */
+.container {
+    max-width: var(--middle-column-max-width);
+    min-width: var(--middle-column-min-width);
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
+}
+
+.left-column, .right-column {
+    flex: 1;
+    min-height: 100%;
+}
+
+.middle-column {
+    flex: 0 0 var(--middle-column-min-width);
+    min-width: var(--middle-column-min-width);
+    max-width: var(--middle-column-max-width);
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   Header & Footer
+   ========================================================================== */
+header, footer {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #74ABD2
+}
+
+header {
+    min-height: var(--header-height);
+}
+
+header .container {
+    height: var(--header-height);
+    align-items: center;
+}
+
+header .middle-column {
+    justify-content: flex-start;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+footer {
+    min-height: var(--footer-height);
+}
+
+footer .container {
+    height: var(--footer-height);
+    justify-content: center;
+    /* margin-top: 20px;
+    margin-bottom: 20px; */
+    align-items: center;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
+}
+
+/* Code Editor Section */
+.code-section {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 400px;
+}
+
+#editor-container {
+    flex: 1;
+    border: var(--canvas-border);
+    border-radius: var(--canvas-border-radius);
+    height: 600px;
+    overflow: hidden;
+}
+
+/* Button Styles */
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--button-color);
+    color: white;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* ==========================================================================
+   CodeMirror Editor Styles
+   ========================================================================== */
+.cm-editor {
+    height: 100%;
+    font-size: 16px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.cm-content {
+    line-height: 1.6;
+}
+
+.cm-gutters {
+    background-color: #eef2f3 !important;
+    border-right: 1px solid #ddd;
+    width: 40px;
+}
+
+.cm-lineNumbers .cm-gutterElement {
+    padding: 0 10px;
+    line-height: 1.6;
+    color: #cad4d8;
+}
+
+.cm-activeLineGutter {
+    color: #2196f3;
+    font-weight: bold;
+    background-color: transparent !important;
+}
+
+.cm-activeLine {
+    background-color: #e8e8e4;
+}
+
+/* CodeMirror Syntax Highlighting */
+.cm-keyword { color: #C792EA; }
+.cm-number { color: #F78C6C; }
+.cm-variable { color: #82AAFF; }
+.cm-operator { color: #89DDFF; }
+.cm-bracket { color: #89DDFF; }
+.cm-function { 
+    color: #82AAFF;
+    font-weight: bold;
+}
+.cm-comment { 
+    color: #546E7A;
+    font-style: italic;
+}
+.cm-string { color: #C3E88D; }
+.executed-line { background-color: #edf2fb; }
+
+/* ==========================================================================
+   Canvas Section
+   ========================================================================== */
+#logo-container {
+    flex: 0 0 auto;
+    width: var(--canvas-size);
+    height: var(--canvas-size);
+    position: relative;
+}
+
+#logo-container svg {
+    width: 100%;
+    height: 100%;
+    background-color: var(--canvas-bg);
+    border: var(--canvas-border);
+    border-radius: var(--canvas-border-radius);
+}
+
+/* Turtle Status Overlay */
+.turtle-status {
+    position: absolute;
+    color: #db7f8e;
+    top: 5px;
+    left: 5px;
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-image {
+    height: 120px;  /* Adjust based on your logo's dimensions */
+    width: auto;   /* Maintains aspect ratio */
+    object-fit: contain;
+}
