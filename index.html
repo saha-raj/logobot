@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logo Bot</title>
-    <link rel="stylesheet" href="styles/main.css"> <!-- Ensure this path is correct -->
+    <link rel="stylesheet" href="styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,13 +13,41 @@
             <div class="left-column"></div>
             <div class="middle-column">
                 <a href="/" class="logo-link">
-                    <img src="images/logobot.png" alt="LogoBot" class="logo-image"> <!-- Ensure this path is correct -->
+                    <img src="images/logobot.png" alt="LogoBot" class="logo-image">
                 </a>
             </div>
             <div class="right-column"></div>
         </div>
     </header>
-    <!-- Rest of your HTML -->
-    <script src="main.bundle.js"></script> <!-- Ensure this path is correct -->
+
+    <main>
+        <div class="container">
+            <div class="left-column"></div>
+            <div class="middle-column">
+                <div class="code-section">
+                    <div id="editor-container"></div>
+                    <div class="button-group">
+                        <button id="run-btn">Run</button>
+                        <button id="clear-canvas-btn">Clear Canvas</button>
+                        <button id="clear-all-btn">Clear Everything</button>
+                    </div>
+                </div>
+                <div id="logo-container"></div>
+            </div>
+            <div class="right-column"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="left-column"></div>
+            <div class="middle-column">
+                <p>LogoBot v1.0.0</p>
+            </div>
+            <div class="right-column"></div>
+        </div>
+    </footer>
+
+    <script src="main.bundle.js"></script>
 </body>
 </html>
