@@ -57,6 +57,7 @@ footer {
     display: flex;
     align-items: center;
     margin-top: auto;
+    font-weight: 200;
 }
 
 .logo-link {
@@ -207,4 +208,36 @@ button:hover, .theme-select:hover {
 .cm-line {
     line-height: 1.6;  /* Match the gutter line height */
     padding: 0;  /* Remove any default padding */
+}
+
+
+header .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--content-width);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo-link {
+    margin-right: auto;
+}
+
+.docs-link {
+    color: #74ABD2;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.docs-link:hover {
+    color: #5590BC;
 }
