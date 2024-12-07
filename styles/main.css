@@ -3,17 +3,18 @@
    ========================================================================== */
    :root {
     --footer-height: 40px;
-    --header-height: 160px;
-    --middle-column-min-width: 1100px;
-    --middle-column-max-width: 1400px;
+    --header-height: 80px;
+    --content-width: 75%;
+    --content-max-width: 1400px;
     --canvas-size: 600px;
+    --editor-height: calc(var(--canvas-size) - 70px);
     --canvas-bg: #fff;
     --canvas-border: 1px solid #dce3e6;
     --canvas-border-radius: 4px;
-    --test-canvas-size: 200px;
     --primary-color: #fff;
-    --button-color: #74ABD2;
-    --button-hover-color: #468FC3;
+    --button-color: #70d6ff;
+    --button-hover-color: #33C5FF;
+    --gap: 40px;
 }
 
 /* ==========================================================================
@@ -28,28 +29,12 @@ body {
     font-family: 'JetBrains Mono', monospace;
 }
 
-/* Container and Column Layout */
+/* Container Layout */
 .container {
-    max-width: var(--middle-column-max-width);
-    min-width: var(--middle-column-min-width);
+    width: var(--content-width);
+    max-width: var(--content-max-width);
     margin: 0 auto;
-    display: flex;
-    width: 100%;
-}
-
-.left-column, .right-column {
-    flex: 1;
-    min-height: 100%;
-}
-
-.middle-column {
-    flex: 0 0 var(--middle-column-min-width);
-    min-width: var(--middle-column-min-width);
-    max-width: var(--middle-column-max-width);
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 /* ==========================================================================
@@ -58,39 +43,32 @@ body {
 header, footer {
     width: 100%;
     background-color: var(--primary-color);
-    color: #74ABD2
+    color: #74ABD2;
 }
 
 header {
-    min-height: var(--header-height);
-}
-
-header .container {
     height: var(--header-height);
+    display: flex;
     align-items: center;
-}
-
-header .middle-column {
-    justify-content: flex-start;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 24px;
 }
 
 footer {
-    min-height: var(--footer-height);
+    height: var(--footer-height);
+    display: flex;
+    align-items: center;
+    margin-top: auto;
 }
 
-footer .container {
-    height: var(--footer-height);
-    justify-content: center;
-    /* margin-top: 20px;
-    margin-bottom: 20px; */
+.logo-link {
+    display: flex;
     align-items: center;
-    font-size: 12px;
-    font-weight: 300;
+    text-decoration: none;
+}
+
+.logo-image {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
 }
 
 /* ==========================================================================
@@ -98,25 +76,29 @@ footer .container {
    ========================================================================== */
 main {
     flex: 1;
+    padding-top: 10px;
+    padding-bottom: var(--gap);
+}
+
+main .container {
     display: flex;
-    justify-content: center;
-    /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
+    gap: var(--gap);
+    align-items: flex-start;
 }
 
 /* Code Editor Section */
 .code-section {
-    flex: 0 0 40%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 400px;
+    min-width: 0;
 }
 
 #editor-container {
-    flex: 1;
+    height: var(--editor-height);
     border: var(--canvas-border);
     border-radius: var(--canvas-border-radius);
-    height: 600px;
     overflow: hidden;
 }
 
@@ -124,9 +106,10 @@ main {
 .button-group {
     display: flex;
     gap: 10px;
+    padding: 10px 0;
 }
 
-button {
+button, .theme-select {
     padding: 8px 16px;
     font-family: 'JetBrains Mono', monospace;
     border: none;
@@ -136,68 +119,13 @@ button {
     color: white;
 }
 
-button:hover {
+button:hover, .theme-select:hover {
     background-color: var(--button-hover-color);
 }
 
-/* ==========================================================================
-   CodeMirror Editor Styles
-   ========================================================================== */
-.cm-editor {
-    height: 100%;
-    font-size: 16px;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.cm-content {
-    line-height: 1.6;
-}
-
-.cm-gutters {
-    background-color: #eef2f3 !important;
-    border-right: 1px solid #ddd;
-    width: 40px;
-}
-
-.cm-lineNumbers .cm-gutterElement {
-    padding: 0 10px;
-    line-height: 1.6;
-    color: #cad4d8;
-}
-
-.cm-activeLineGutter {
-    color: #2196f3;
-    font-weight: bold;
-    background-color: transparent !important;
-}
-
-.cm-activeLine {
-    background-color: #e8e8e4;
-}
-
-/* CodeMirror Syntax Highlighting */
-.cm-keyword { color: #C792EA; }
-.cm-number { color: #F78C6C; }
-.cm-variable { color: #82AAFF; }
-.cm-operator { color: #89DDFF; }
-.cm-bracket { color: #89DDFF; }
-.cm-function { 
-    color: #82AAFF;
-    font-weight: bold;
-}
-.cm-comment { 
-    color: #546E7A;
-    font-style: italic;
-}
-.cm-string { color: #C3E88D; }
-.executed-line { background-color: #edf2fb; }
-
-/* ==========================================================================
-   Canvas Section
-   ========================================================================== */
+/* Canvas Section */
 #logo-container {
-    flex: 0 0 auto;
-    width: var(--canvas-size);
+    flex: 0 0 var(--canvas-size);
     height: var(--canvas-size);
     position: relative;
 }
@@ -213,25 +141,70 @@ button:hover {
 /* Turtle Status Overlay */
 .turtle-status {
     position: absolute;
-    color: #db7f8e;
+    color: #ff70a6;
     top: 5px;
     left: 5px;
     padding: 5px 10px;
     background-color: #f8f9fa;
     border-radius: 4px;
     font-family: monospace;
-    font-size: 12px;
+    font-size: 14px;
     z-index: 1000;
+    pointer-events: none;
 }
 
-.logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+/* ==========================================================================
+   Responsive Layout
+   ========================================================================== */
+@media (max-width: 1200px) {
+    :root {
+        --content-width: 95%;
+        --canvas-size: 500px;
+        --gap: 20px;
+    }
 }
 
-.logo-image {
-    height: 120px;  /* Adjust based on your logo's dimensions */
-    width: auto;   /* Maintains aspect ratio */
-    object-fit: contain;
+@media (max-width: 900px) {
+    main .container {
+        flex-direction: column;
+    }
+
+    .code-section, #logo-container {
+        width: 100%;
+    }
+
+    #logo-container {
+        flex: 0 0 500px;
+    }
+}
+
+/* CodeMirror Editor Styles */
+.cm-editor {
+    height: 100%;
+}
+
+.cm-content {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    padding: 0;
+}
+
+.cm-gutters {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    min-width: 40px;
+    padding: 0;
+
+}
+
+.cm-lineNumbers .cm-gutterElement {
+    padding: 0 12px;
+    text-align: right;
+    line-height: 1.6;  /* Add this to match line height */
+    vertical-align: top;  /* Add this to align with code */
+}
+
+.cm-line {
+    line-height: 1.6;  /* Match the gutter line height */
+    padding: 0;  /* Remove any default padding */
 }
