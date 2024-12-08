@@ -1,0 +1,37 @@
+name: Sync to Sage Labs Logobot
+
+on:
+  # Trigger on push to any branch
+  push:
+    branches:
+      - '**'
+  # Optional: Add scheduled sync
+  schedule:
+    # Runs every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  # Optional: Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  sync-repos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+
+      - name: Push to organization repository
+        env:
+          TARGET_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+        run: |
+          # Add target repository as a remote
+          git remote add target https://x-access-token:${TARGET_TOKEN}@github.com/sage-labs-edu/logobot.git
+          
+          # Push all branches and tags to target repository
+          git push target --mirror --force
